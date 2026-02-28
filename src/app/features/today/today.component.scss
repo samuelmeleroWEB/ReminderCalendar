@@ -14,10 +14,12 @@
 
 .user-greeting {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 1rem;
     align-items: center;
     margin-bottom: 1rem;
     padding-top: 1rem;
+    padding-right: 4rem; // Reserve space for the floating settings button
 
     h2 {
         font-size: 1.2rem;

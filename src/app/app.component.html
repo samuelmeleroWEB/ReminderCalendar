@@ -1,6 +1,11 @@
 <app-alarm-overlay></app-alarm-overlay>
 
 <div class="app-shell">
+  <!-- Mobile Floating Settings Button -->
+  <button class="settings-floating-btn mobile-only" routerLink="/settings" aria-label="Ajustes">
+    <lucide-icon [name]="icons.Settings" size="24"></lucide-icon>
+  </button>
+
   <!-- Desktop Sidebar -->
   <aside class="side-nav desktop-only">
     <div class="brand">
@@ -73,11 +78,11 @@
       <span>Focus</span>
     </a>
 
-    <a routerLink="/settings" routerLinkActive="active" aria-label="Ajustes">
+    <a routerLink="/dashboard" routerLinkActive="active" aria-label="Stats">
       <div class="icon-wrapper">
-        <lucide-icon [name]="icons.Settings" size="24"></lucide-icon>
+        <lucide-icon [name]="icons.BarChart2" size="24"></lucide-icon>
       </div>
-      <span>Ajustes</span>
+      <span>Stats</span>
     </a>
   </nav>
 

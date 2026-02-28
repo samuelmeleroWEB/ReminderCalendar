@@ -110,6 +110,29 @@ header {
                 opacity: 1;
             }
         }
+
+        .btn-delete-avatar {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: $danger-color;
+            color: white;
+            border: 2px solid $surface-elevated;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            transition: transform 0.2s, background 0.2s;
+
+            &:hover {
+                transform: scale(1.1);
+                background: color-mix(in srgb, $danger-color, black 10%);
+            }
+        }
     }
 
     .form-group {

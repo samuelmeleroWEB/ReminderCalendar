@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ThemeService, Theme } from '../../core/services/theme.service';
 import { NotificationService } from '../../core/services/notification.service';
-import { LucideAngularModule, ArrowLeft, User, Image, Bell, Check, Palette } from 'lucide-angular';
+import { LucideAngularModule, ArrowLeft, User, Image, Bell, Check, Palette, Trash2 } from 'lucide-angular';
 
 @Component({
     selector: 'app-settings',
@@ -18,7 +18,7 @@ export class SettingsComponent {
     notificationService = inject(NotificationService);
     router = inject(Router);
 
-    readonly icons = { ArrowLeft, User, Image, Bell, Check, Palette };
+    readonly icons = { ArrowLeft, User, Image, Bell, Check, Palette, Trash2 };
 
     username = signal('');
     avatar = signal<string | null>(null);
@@ -59,6 +59,11 @@ export class SettingsComponent {
 
             reader.readAsDataURL(file);
         }
+    }
+
+    deleteAvatar() {
+        this.avatar.set(null);
+        localStorage.removeItem('daily-planner-avatar');
     }
 
     requestNotifications() {

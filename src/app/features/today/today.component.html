@@ -1,7 +1,6 @@
 <div class="today-container">
   
   <div class="user-greeting">
-    <h2>{{ greeting() }}</h2>
     <a routerLink="/settings" class="avatar-link">
       @if (avatar()) {
         <img [src]="avatar()" alt="Avatar" class="avatar-img">
@@ -9,6 +8,7 @@
         <div class="avatar-placeholder">{{ username().slice(0, 2).toUpperCase() }}</div>
       }
     </a>
+    <h2>{{ greeting() }}</h2>
   </div>
 
   <header class="header">
