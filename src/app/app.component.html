@@ -1,0 +1,100 @@
+<app-alarm-overlay></app-alarm-overlay>
+
+<div class="app-shell">
+  <!-- Desktop Sidebar -->
+  <aside class="side-nav desktop-only">
+    <div class="brand">
+      <img src="/assets/logo.svg" alt="App Logo" width="40" height="40">
+      <h1>Daily Planner</h1>
+    </div>
+
+    <button class="btn-new-task" routerLink="/add-task">
+      <lucide-icon [name]="icons.Plus" size="20"></lucide-icon>
+      <span>Nueva Tarea</span>
+    </button>
+
+    <nav class="nav-links">
+      <a routerLink="/today" routerLinkActive="active">
+        <lucide-icon [name]="icons.ListTodo" size="20"></lucide-icon>
+        <span>Hoy</span>
+      </a>
+      <a routerLink="/calendar" routerLinkActive="active">
+        <lucide-icon [name]="icons.Calendar" size="20"></lucide-icon>
+        <span>Calendario</span>
+      </a>
+      <a routerLink="/focus" routerLinkActive="active">
+        <lucide-icon [name]="icons.Hourglass" size="20"></lucide-icon>
+        <span>Focus</span>
+      </a>
+      <a routerLink="/dashboard" routerLinkActive="active">
+        <lucide-icon [name]="icons.BarChart2" size="20"></lucide-icon>
+        <span>Stats</span>
+      </a>
+    </nav>
+
+    <div class="nav-footer">
+      <a routerLink="/settings" routerLinkActive="active" class="settings-link">
+        <lucide-icon [name]="icons.Settings" size="20"></lucide-icon>
+        <span>Ajustes</span>
+      </a>
+    </div>
+  </aside>
+
+  <main class="content-area">
+    <router-outlet></router-outlet>
+  </main>
+  
+  <!-- Mobile Bottom Nav -->
+  <nav class="bottom-nav mobile-only">
+    <a routerLink="/today" routerLinkActive="active" aria-label="Hoy">
+      <div class="icon-wrapper">
+        <lucide-icon [name]="icons.ListTodo" size="24"></lucide-icon>
+      </div>
+      <span>Hoy</span>
+    </a>
+    
+    <a routerLink="/calendar" routerLinkActive="active" aria-label="Calendario">
+      <div class="icon-wrapper">
+        <lucide-icon [name]="icons.Calendar" size="24"></lucide-icon>
+      </div>
+      <span>Cal</span>
+    </a>
+
+    <div class="fab-wrapper">
+      <button class="fab-mini" routerLink="/add-task">
+        <lucide-icon [name]="icons.Plus" size="28"></lucide-icon>
+      </button>
+    </div>
+
+    <a routerLink="/focus" routerLinkActive="active" aria-label="Focus">
+      <div class="icon-wrapper">
+        <lucide-icon [name]="icons.Hourglass" size="24"></lucide-icon>
+      </div>
+      <span>Focus</span>
+    </a>
+
+    <a routerLink="/settings" routerLinkActive="active" aria-label="Ajustes">
+      <div class="icon-wrapper">
+        <lucide-icon [name]="icons.Settings" size="24"></lucide-icon>
+      </div>
+      <span>Ajustes</span>
+    </a>
+  </nav>
+
+  @if (showInstallPrompt()) {
+    <div class="install-banner">
+      <div class="text">
+        <strong>Instala la app</strong>
+        <p>Añade Daily Planner a tu pantalla de inicio</p>
+      </div>
+      <div class="actions">
+        <button class="btn-dismiss" (click)="dismissInstall()">
+          <lucide-icon [name]="icons.X" size="20"></lucide-icon>
+        </button>
+        <button class="btn-install" (click)="installPwa()">
+          Instalar
+        </button>
+      </div>
+    </div>
+  }
+</div>

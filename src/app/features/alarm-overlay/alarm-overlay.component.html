@@ -1,0 +1,21 @@
+@if (isVisible()) {
+<div class="overlay-container">
+  <div class="content">
+    <div class="pulse-ring"></div>
+    <div class="icon-wrapper">
+      <div class="bell-icon">🔔</div>
+    </div>
+    
+    <div class="time-display">{{ task()?.startTime }}</div>
+    <h2 class="task-title">{{ task()?.title }}</h2>
+    <p class="task-desc">{{ task()?.description || 'Es hora de comenzar.' }}</p>
+
+    <div class="spacer"></div>
+
+    <button class="btn-unlock" (click)="unlock()">
+      <span class="unlock-icon">🔓</span>
+      DESBLOQUEAR TAREA
+    </button>
+  </div>
+</div>
+}

@@ -1,0 +1,48 @@
+<div class="today-container">
+  
+  <div class="user-greeting">
+    <h2>{{ greeting() }}</h2>
+    <a routerLink="/settings" class="avatar-link">
+      @if (avatar()) {
+        <img [src]="avatar()" alt="Avatar" class="avatar-img">
+      } @else {
+        <div class="avatar-placeholder">{{ username().slice(0, 2).toUpperCase() }}</div>
+      }
+    </a>
+  </div>
+
+  <header class="header">
+    <div class="date-navigation">
+      <button class="nav-btn" (click)="prevDay()">
+        <lucide-icon [name]="icons.ChevronLeft"></lucide-icon>
+      </button>
+      <div class="date-display">
+        <h1>{{ formattedDisplayDate() }}</h1>
+        <div class="full-date">{{ selectedDate() | date:'fullDate' }}</div>
+      </div>
+      <button class="nav-btn" (click)="nextDay()">
+        <lucide-icon [name]="icons.ChevronRight"></lucide-icon>
+      </button>
+    </div>
+  </header>
+
+  <div class="timeline">
+    @if (tasks().length === 0) {
+      <div class="empty-state">
+        <p>No hay tareas para este día.</p>
+        <small>Toca el botón + para añadir una.</small>
+      </div>
+    } @else {
+      @for (task of tasks(); track task.id) {
+        <app-task-card 
+          [task]="task" 
+          (edit)="editTask(task.id)"
+          (delete)="deleteTask(task.id)"
+          (statusChange)="toggleStatus(task)">
+        </app-task-card>
+      }
+    }
+  </div>
+
+  <!-- FAB Removed as requested (moved to central App nav) -->
+</div>

@@ -1,0 +1,72 @@
+<div class="settings-container">
+  <header>
+    <button class="btn-icon" (click)="goBack()">
+      <lucide-icon [name]="icons.ArrowLeft"></lucide-icon>
+    </button>
+    <h1>Ajustes</h1>
+  </header>
+
+  <div class="section profile-section">
+    <h2><lucide-icon [name]="icons.User" size="20"></lucide-icon> Perfil</h2>
+    
+    <div class="profile-card">
+      <div class="avatar-upload">
+        <input type="file" id="avatarInput" (change)="onFileSelected($event)" accept="image/*">
+        <label for="avatarInput" class="avatar-circle">
+          @if (avatar()) {
+            <img [src]="avatar()" alt="Avatar">
+          } @else {
+            <span class="initials">{{ getInitials() }}</span>
+          }
+          <div class="edit-overlay"><lucide-icon [name]="icons.Image" size="24"></lucide-icon></div>
+        </label>
+      </div>
+      
+      <div class="form-group">
+        <label>Nombre de usuario</label>
+        <input type="text" [ngModel]="username()" (ngModelChange)="updateUsername($event)" placeholder="Tu nombre">
+      </div>
+    </div>
+  </div>
+
+  <div class="section notification-section">
+    <h2><lucide-icon [name]="icons.Bell" size="20"></lucide-icon> Notificaciones</h2>
+    
+    <div class="notification-card">
+      <div class="status">
+        <span>Estado del permiso:</span>
+        <span class="badge" [class.granted]="notificationPermission() === 'granted'" [class.denied]="notificationPermission() === 'denied'">
+          {{ notificationPermission() }}
+        </span>
+      </div>
+      
+      @if (notificationPermission() === 'default') {
+        <button class="btn-primary" (click)="requestNotifications()">Activar Notificaciones</button>
+      }
+    </div>
+  </div>
+
+  <div class="section themes-section">
+    <h2><lucide-icon [name]="icons.Palette" size="20"></lucide-icon> Temas</h2>
+    
+    <div class="themes-grid">
+      @for (theme of themeService.themes; track theme.id) {
+        <div class="theme-card" 
+             [class.active]="themeService.activeTheme().id === theme.id"
+             (click)="selectTheme(theme.id)">
+          
+          <div class="color-preview" [style.background]="theme.colors.primary">
+            <div class="accent-dot" [style.background]="theme.colors.accent"></div>
+          </div>
+          
+          <div class="theme-info">
+            <span class="theme-name">{{ theme.name }}</span>
+            @if (themeService.activeTheme().id === theme.id) {
+              <lucide-icon [name]="icons.Check" size="16" class="check-icon"></lucide-icon>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>

@@ -1,0 +1,134 @@
+@import '../../../../styles/variables';
+
+.task-card {
+    background: $surface-elevated;
+    border-radius: $border-radius;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+
+    &:hover {
+        transform: translateY(-2px);
+        background: color-mix(in srgb, var(--surface-elevated), white 2%);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    &.active {
+        border-left: 3px solid $accent-color;
+        background: linear-gradient(90deg, rgba($accent-color, 0.05) 0%, $surface-elevated 100%);
+    }
+
+    &.completed {
+        opacity: 0.5;
+        border-color: transparent;
+        background: rgba($surface-elevated, 0.5);
+
+        h3,
+        p,
+        .task-time {
+            text-decoration: line-through;
+            color: $text-secondary;
+        }
+
+        &:hover {
+            transform: none;
+            opacity: 0.7;
+        }
+
+        .status-btn {
+            background: $primary-color;
+            border-color: $primary-color;
+            color: white;
+        }
+    }
+}
+
+.status-btn {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid $text-secondary;
+    background: transparent;
+    cursor: pointer;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    color: transparent;
+
+    &:hover {
+        border-color: $accent-color;
+    }
+}
+
+.task-content {
+    flex: 1;
+    min-width: 0;
+
+    .task-time {
+        font-size: 0.75rem;
+        color: $accent-color;
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+    }
+
+    h3 {
+        font-size: 1rem;
+        margin: 0 0 0.25rem 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    p {
+        font-size: 0.85rem;
+        color: $text-secondary;
+        margin: 0;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+}
+
+.actions {
+    display: flex;
+    gap: 0.5rem;
+    opacity: 0; // Hide actions by default for cleaner look on mobile
+    transition: opacity 0.2s;
+
+    .task-card:hover &,
+    .task-card:focus-within & {
+        opacity: 1;
+    }
+}
+
+.btn-icon {
+    background: transparent;
+    border: none;
+    color: $text-secondary;
+    padding: 0.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+    }
+
+    &.delete:hover {
+        color: $danger-color;
+        background: rgba($danger-color, 0.1);
+    }
+}

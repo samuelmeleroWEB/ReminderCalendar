@@ -1,0 +1,116 @@
+<div class="add-task-container">
+    <header>
+        <button class="btn-cancel" (click)="cancel()">Cancel</button>
+        <h1>{{ isEditing ? 'Editar Tarea' : 'Nueva Tarea' }}</h1>
+        <button class="btn-save" (click)="onSubmit()" [disabled]="form.invalid">Guardar</button>
+    </header>
+
+    <form [formGroup]="form" (submit)="onSubmit()" class="task-form">
+        <div class="form-group title-group">
+            <input type="text" formControlName="title" placeholder="Título de la tarea" class="title-input">
+        </div>
+
+        <!-- Custom Date Picker -->
+        <div class="form-group">
+            <label>Fecha</label>
+            <div class="custom-picker">
+                <div class="picker-trigger" (click)="toggleDatePicker()" [class.active]="showDatePicker">
+                    <lucide-icon [name]="icons.Calendar" size="20"></lucide-icon>
+                    <span>{{ form.get('date')?.value | date:'fullDate':'':'es-ES' | titlecase }}</span>
+                </div>
+
+                @if (showDatePicker) {
+                <div class="picker-dropdown calendar-dropdown">
+                    <div class="calendar-header">
+                        <button type="button" (click)="prevMonth($event)">
+                            <lucide-icon [name]="icons.ChevronLeft" size="18"></lucide-icon>
+                        </button>
+                        <span class="month-name">{{ currentMonthName | titlecase }}</span>
+                        <button type="button" (click)="nextMonth($event)">
+                            <lucide-icon [name]="icons.ChevronRight" size="18"></lucide-icon>
+                        </button>
+                    </div>
+                    
+                    <div class="quick-actions">
+                        <button type="button" (click)="setToday()">Hoy</button>
+                        <button type="button" (click)="setTomorrow()">Mañana</button>
+                    </div>
+
+                    <div class="calendar-grid">
+                        @for (day of weekDays; track day) { <div class="wday">{{day}}</div> }
+                        
+                        @for (d of calendarDays; track $index) {
+                            @if (d) {
+                                <div class="day" [class.today]="d.isToday" [class.selected]="d.isSelected"
+                                    (click)="selectDate(d.date)">
+                                    {{ d.day }}
+                                </div>
+                            } @else {
+                                <div class="empty"></div>
+                            }
+                        }
+                    </div>
+                </div>
+                }
+            </div>
+            <!-- Hidden input binding if needed, but logic handles it -->
+        </div>
+
+        <div class="time-row">
+            <!-- Custom Time Picker -->
+            <div class="form-group time-group">
+                <label>Hora de inicio</label>
+                <div class="custom-picker">
+                    <div class="picker-trigger" (click)="toggleTimePicker()" [class.active]="showTimePicker">
+                        <lucide-icon [name]="icons.Clock" size="20"></lucide-icon>
+                        <span>{{ form.get('startTime')?.value }}</span>
+                    </div>
+
+                    @if (showTimePicker) {
+                    <div class="picker-dropdown time-dropdown">
+                        <div class="time-cols">
+                            <div class="col hours-col">
+                                <div class="col-label">Hora</div>
+                                @for (h of availableHours; track h) {
+                                <div class="time-item" 
+                                     [class.selected]="form.get('startTime')?.value?.startsWith(h)"
+                                     (click)="selectTime(h, form.get('startTime')?.value?.split(':')[1] || '00')">
+                                    {{ h }}
+                                </div>
+                                }
+                            </div>
+                            <div class="col mins-col">
+                                <div class="col-label">Min</div>
+                                @for (m of availableMinutes; track m) {
+                                <div class="time-item"
+                                     [class.selected]="form.get('startTime')?.value?.endsWith(m)"
+                                     (click)="selectTime(form.get('startTime')?.value?.split(':')[0] || '12', m)">
+                                    {{ m }}
+                                </div>
+                                }
+                            </div>
+                        </div>
+                        <button type="button" class="btn-confirm-time" (click)="toggleTimePicker()">
+                            <lucide-icon [name]="icons.Check" size="16"></lucide-icon> Listo
+                        </button>
+                    </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Duration Input (Native number is fine for now, or just styled input) -->
+            <div class="form-group duration-group">
+                <label>Duración (min)</label>
+                <div class="duration-input-wrapper">
+                    <input type="number" formControlName="duration" min="1">
+                    <span class="suffix">min</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Descripción</label>
+            <textarea formControlName="description" rows="4" placeholder="Añade detalles..."></textarea>
+        </div>
+    </form>
+</div>

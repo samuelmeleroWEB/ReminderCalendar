@@ -1,0 +1,39 @@
+<div class="focus-container">
+  <h1>Focus Mode</h1>
+
+  <div class="timer-display horizontal">
+    <div class="time-text">{{ formattedTime() }}</div>
+    <div class="mode-text">{{ formatMode(pomodoroService.currentMode()) }}</div>
+    
+    <div class="progress-bar-container">
+      <div class="progress-bar-bg"></div>
+      <div class="progress-bar-fill" [style.width.%]="progressPercent()"></div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="btn-control" (click)="pomodoroService.toggleTimer()">
+      @if (pomodoroService.isRunning()) {
+        <lucide-icon [name]="icons.Pause" size="28"></lucide-icon>
+      } @else {
+        <lucide-icon [name]="icons.Play" size="28" style="margin-left: 4px;"></lucide-icon>
+      }
+    </button>
+    <button class="btn-control secondary" (click)="pomodoroService.resetTimer()">
+      <lucide-icon [name]="icons.RotateCcw" size="24"></lucide-icon>
+    </button>
+  </div>
+
+  <div class="modes">
+    <button [class.active]="pomodoroService.currentMode() === 'focus'" (click)="pomodoroService.setMode('focus')">Focus</button>
+    <button [class.active]="pomodoroService.currentMode() === 'short-break'" (click)="pomodoroService.setMode('short-break')">Short Break</button>
+    <button [class.active]="pomodoroService.currentMode() === 'long-break'" (click)="pomodoroService.setMode('long-break')">Long Break</button>
+  </div>
+
+  <div class="stats">
+    <div class="stat-item">
+      <span class="label">Sesiones hoy</span>
+      <span class="value">{{ pomodoroService.sessionsCompleted() }}</span>
+    </div>
+  </div>
+</div>
