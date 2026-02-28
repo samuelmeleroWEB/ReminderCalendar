@@ -1,0 +1,24 @@
+<div class="task-card" [class.completed]="task().status === 'completed'" [class.active]="task().status === 'in-progress'">
+  <button class="status-btn" (click)="onToggleStatus($event)">
+    @if (task().status === 'completed') {
+      <lucide-icon [name]="icons.Check" size="16"></lucide-icon>
+    }
+  </button>
+
+  <div class="task-content">
+    <div class="task-time">{{ task().startTime | timeFormat:task().duration }}</div>
+    <h3>{{ task().title }}</h3>
+    @if (task().description) {
+      <p>{{ task().description }}</p>
+    }
+  </div>
+
+  <div class="actions">
+    <button class="btn-icon" (click)="onEdit($event)">
+      <lucide-icon [name]="icons.Edit2" size="16"></lucide-icon>
+    </button>
+    <button class="btn-icon delete" (click)="onDelete($event)">
+      <lucide-icon [name]="icons.Trash2" size="16"></lucide-icon>
+    </button>
+  </div>
+</div>

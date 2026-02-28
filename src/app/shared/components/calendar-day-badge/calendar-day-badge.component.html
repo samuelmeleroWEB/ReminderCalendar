@@ -1,0 +1,6 @@
+<div class="badge" [class.has-tasks]="taskCount() > 0">
+  <div class="day-number" [class.active]="active()">{{ day() }}</div>
+  @if (taskCount() > 0) {
+    <div class="dot"></div>
+  }
+</div>

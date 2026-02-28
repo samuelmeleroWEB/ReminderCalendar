@@ -1,0 +1,40 @@
+@import '../../../../styles/variables';
+
+.badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 8px;
+    transition: background 0.2s;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.05);
+    }
+}
+
+.day-number {
+    font-size: 1rem;
+    color: white;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+
+    &.active {
+        background: $primary-color;
+        font-weight: bold;
+    }
+}
+
+.dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: $accent-color;
+}

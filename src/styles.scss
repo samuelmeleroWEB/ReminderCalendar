@@ -1,0 +1,35 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'styles/variables';
+
+body {
+    background-color: $bg-color;
+    background: radial-gradient(ellipse at top left, #1a1040 0%, #111318 40%, #0f1419 100%);
+    background-attachment: fixed;
+    color: $text-primary;
+    margin: 0;
+    font-family: $font-family;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+* {
+    box-sizing: border-box;
+}
+
+// Global Scrollbar
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $surface-elevated;
+    border-radius: 3px;
+
+    &:hover {
+        background: $primary-color;
+    }
+}

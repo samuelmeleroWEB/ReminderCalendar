@@ -1,0 +1,100 @@
+<div class="calendar-container">
+  <header>
+    <h1>Calendario</h1>
+    <div class="view-toggles">
+      <button [class.active]="view() === 'week'" (click)="view.set('week')">Semana</button>
+      <button [class.active]="view() === 'month'" (click)="view.set('month')">Mes</button>
+    </div>
+  </header>
+
+  <div class="nav-controls">
+    <button (click)="previous()">
+      <lucide-icon [name]="icons.ChevronLeft" size="24"></lucide-icon>
+    </button>
+    <span class="current-date">{{ currentMonthYear() }}</span>
+    <button (click)="next()">
+      <lucide-icon [name]="icons.ChevronRight" size="24"></lucide-icon>
+    </button>
+  </div>
+
+  @if (view() === 'month') {
+    <div class="month-grid">
+      @for (day of weekDays; track day) {
+        <div class="weekday-header">{{ day }}</div>
+      }
+      
+      @for (d of monthDays(); track $index) {
+        <div class="calendar-cell" 
+             [class.out-of-month]="!d.isCurrentMonth"
+             [class.today]="d.isToday"
+             (click)="goToDay(d.date)">
+          
+          <span class="day-number">{{ d.day }}</span>
+          
+          <div class="tasks-dots">
+            @for (t of d.tasks; track t.id; let i = $index) {
+              @if (i < 3) {
+                <div class="dot" [style.background-color]="'#00e5ff'"></div>
+              }
+            }
+            @if (d.totalTasks > 3) {
+              <span class="more-count">+{{ d.totalTasks - 3 }}</span>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  } @else {
+    <div class="week-view-container">
+      <div class="time-column">
+        <div class="header-spacer"></div>
+        @for (h of hours; track h) {
+          <div class="time-slot">
+            <span>{{ h }}</span>
+          </div>
+        }
+      </div>
+
+      <div class="days-column">
+        <!-- Headers -->
+        <div class="days-header-row">
+           @for (d of weekDaysData(); track d.dateStr) {
+             <div class="day-header" [class.today]="d.isToday" (click)="goToDay(d.dateStr)">
+               <span class="day-name">{{ d.dayName }}</span>
+               <span class="day-num">{{ d.dayNum }}</span>
+             </div>
+           }
+        </div>
+
+        <!-- Grid Body -->
+        <div class="grid-body">
+            <!-- Current Time Indicator -->
+            <div class="current-time-line" [style.top.px]="currentTimeTop()">
+                <div class="dot"></div>
+            </div>
+
+            <!-- Guide Lines -->
+            @for (h of hours; track h; let i = $index) {
+                <div class="guide-line" [style.top.px]="i * 120"></div>
+            }
+
+            <!-- Task Columns -->
+            <div class="task-cols-container">
+                @for (d of weekDaysData(); track d.dateStr) {
+                    <div class="day-task-col" (click)="goToDay(d.dateStr)">
+                        @for (t of d.tasks; track t.id) {
+                            <div class="task-block" 
+                                 [ngStyle]="getTaskStyle(t)"
+                                 [title]="t.title">
+                                <span class="task-title">{{ t.title }}</span>
+                                <span class="task-time">{{ t.startTime }}</span>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>

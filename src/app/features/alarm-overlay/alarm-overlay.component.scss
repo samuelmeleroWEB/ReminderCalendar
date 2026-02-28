@@ -1,0 +1,137 @@
+@import '../../../styles/variables';
+
+.overlay-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4rem 2rem;
+    position: relative;
+}
+
+.pulse-ring {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: rgba($primary-color, 0.2);
+    animation: pulse 2s infinite;
+    z-index: -1;
+}
+
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0;
+    }
+}
+
+.icon-wrapper {
+    margin-top: 10vh;
+    margin-bottom: 2rem;
+}
+
+.bell-icon {
+    font-size: 4rem;
+}
+
+.time-display {
+    font-size: 4rem;
+    font-weight: 200;
+    color: $accent-color;
+    margin-bottom: 1rem;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -2px;
+}
+
+.task-title {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.task-desc {
+    font-size: 1.1rem;
+    color: $text-secondary;
+    text-align: center;
+    max-width: 80%;
+}
+
+.spacer {
+    flex: 1;
+}
+
+.btn-unlock {
+    width: 100%;
+    max-width: 320px;
+    background: linear-gradient(90deg, $primary-color, #4c1d95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 1.25rem;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    box-shadow: 0 0 20px rgba($primary-color, 0.5);
+    animation: glow 2s infinite alternate;
+    margin-bottom: 2rem;
+
+    &:active {
+        transform: scale(0.98);
+    }
+}
+
+.unlock-icon {
+    font-size: 1.2rem;
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 10px rgba($primary-color, 0.5);
+    }
+
+    to {
+        box-shadow: 0 0 25px rgba($primary-color, 0.8), 0 0 50px rgba($primary-color, 0.4);
+    }
+}
