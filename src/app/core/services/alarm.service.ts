@@ -65,7 +65,7 @@ export class AlarmService implements OnDestroy {
         this.notificationService.showNotification(task.title, {
             body: task.description || '¡Es hora de tu tarea!',
             requireInteraction: true,
-            icon: '/assets/icons/icon-192x192.png'
+            icon: 'assets/icons/icon-192x192.png'
         });
 
         // Vibrate immediately

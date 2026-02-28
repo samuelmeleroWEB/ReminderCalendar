@@ -39,8 +39,8 @@ export class NotificationService {
 
         try {
             new Notification(title, {
-                icon: '/assets/icons/icon-192x192.png',
-                badge: '/assets/icons/icon-72x72.png',
+                icon: 'assets/icons/icon-192x192.png',
+                badge: 'assets/icons/icon-72x72.png',
                 vibrate: [200, 100, 200],
                 ...options
             });
