@@ -63,7 +63,7 @@ Este proyecto ha sido optimizado y desplegado para estar disponible y funcional 
 Puedes entrar a probar tus hábitos directamente aquí:
 🌐 **[https://samuelmeleroweb.github.io/ReminderCalendar](https://samuelmeleroweb.github.io/ReminderCalendar)**
 
-*(Los datos guardados estarán disponibles y ligados al dispositivo desde el que entres de forma privada gracias al LocalStorage nativo del navegador).*
+
 
 ---
 
